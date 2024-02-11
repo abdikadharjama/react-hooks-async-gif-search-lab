@@ -5,16 +5,10 @@ import GifSearch from './GifSearch';
 function GifListContainer() {
   const [gifs, setGifs] = useState([]);
 
-  const fetchGIFs = (query = "dolphins") => {
-    const API_KEY = "YOUR_API_KEY"; // Replace YOUR_API_KEY with your actual Giphy API key
-    const URL = `https://api.giphy.com/v1/gifs/search?q=${query}&api_key=${API_KEY}&rating=g&limit=3`;
-
-    fetch(URL)
+  const fetchGIFs = (query = "cats") => {
+    fetch(`https://api.giphy.com/v1/gifs/search?q=${query}&api_key=8CKQuUQ4WR8TZZsVxqxrs0nc87rfafzh&rating=g`)
       .then(response => response.json())
-      .then(({data}) => {
-        const gifs = data.map(gif => ({ url: gif.images.original.url }));
-        setGifs(gifs);
-      });
+      .then(data => setGifs(data.data.slice(0, 3)));
   };
 
   return (
